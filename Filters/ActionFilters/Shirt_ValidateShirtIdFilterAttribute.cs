@@ -12,7 +12,7 @@ namespace minimalAPI.Filters.ActionFilters
         {
             base.OnActionExecuting(context);
 
-            var shirtId = context.ActionArguments["id"] as int?;
+            var shirtId = context.ActionArguments["id"] as int?;            
             if (shirtId.HasValue)
             {
                 if (shirtId.Value <= 0)
@@ -28,14 +28,14 @@ namespace minimalAPI.Filters.ActionFilters
                 {
                     context.ModelState.AddModelError("ShirtId", $"Shirt with id {shirtId.Value} does not exist.");
                     var problemDetails = new ValidationProblemDetails(context.ModelState)
-                        {
-                            Status = StatusCodes.Status404NotFound
-                        };
-                        context.Result = new NotFoundObjectResult(problemDetails);
+                    {
+                        Status = StatusCodes.Status404NotFound
+                    };
+                    context.Result = new NotFoundObjectResult(problemDetails);
                 }
-                
-                   
-                
+
+
+
             }
         }
     }
